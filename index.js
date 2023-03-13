@@ -18,6 +18,10 @@ const productsList = document.querySelector('.container-items');
 //variable de arreglos de Productos
 let allProducts = [];
 
+const valorTotal = document.querySelector('.total-pagar');
+const countProducts = document.querySelector('#contador-productos');
+
+
 
 productsList.addEventListener('click', e => {
     if (e.target.classList.contains('btn-add-cart')) {
@@ -27,21 +31,62 @@ productsList.addEventListener('click', e => {
             quantity: 1,
             title: product.querySelector('h2').textContent,
             price: product.querySelector('p').textContent,
+        };
 
+        const exits = allProducts.some(product => product.title === infoProduct.title);
+
+        if (exits) {
+            const product = allProducts.map(product => {
+                if (product.title === infoProduct.title) {
+                    product.quantity++;
+                    return product;
+                } else {
+                    return product;
+                }
+            });
+            allProducts = [...products];   
+        } else {
+            allProducts = [...allProducts, infoProduct];
         }
-        allProducts = [...allProducts, infoProduct];
 
         showHTML();
-
-        console.log(allProducts);
-
         
     }
 
-})
+});
+
+rowProduct.addEventListener('click', (e) => {
+    if (e.target.classList.contains('icon-close')) {
+        const product = e.target.parentElement;
+        const title = product.querySelector('p').textContent;
+
+        allProducts = allProducts.filter(
+            product => product.title !== title
+        );
+
+        console.log(allProducts);
+        showHTML();
+    }
+});
+
+
 
 //Funcion para mostrar HTML
 const showHTML = () => {
+
+    if (!allProducts.length) {
+        containerCartProducts.innerHTML = `
+        <p class="cart-empty">El carrito esta vacio</p>
+        `
+    }
+
+    //Limpiar HTML
+    rowProduct.innerHTML = '';
+
+
+    let total = 0;
+    let totalOfProducts = 0;
+
     allProducts.forEach(product => {
         const containerProduct = document.createElement('div')
         containerProduct.classList.add('cart-product')
@@ -69,7 +114,12 @@ const showHTML = () => {
 				</svg>
         `
 
-        rowProduct.append(containerProduct);
+        rowProduct.append(containerProduct); 
         
-    })
+        total = total + parseInt(product.quantity * product.price.slice(1));
+        totalOfProducts = totalOfProducts + product.quantity;
+    });
+
+    valorTotal.innerTex = `$${total}`
+    countProducts.innerTex = totalOfProducts;
 }
