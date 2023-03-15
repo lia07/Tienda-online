@@ -72,7 +72,7 @@ nav a:hover{
 }
 
 /*elegir medida*/
-@media (max-width:800px){
+@media (max-width:900px){
     header{
         flex-direction: column;
     }
