@@ -8,11 +8,20 @@
 }
 
 body{
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    margin: 0; /*otro*/
     max-width: 1200px;
     font-family: 'Lato';
     color: #333;
 }
+
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+
 
 .icon-cart{
     width: 40px;
@@ -28,12 +37,55 @@ img{
     max-width: 100%;
 }
 
+
 /* Header */
 header{
     display: flex;
     justify-content: space-between;
     padding: 30px 0 40px 0;
+
+    /**/
+    min-height: 70px;
+    background-color: aqua;
+    align-items: center;
+    padding: 10px;
 }
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo img{
+    height: 50px;
+    margin-right: 10px;
+}
+
+nav a{
+    font-weight: 600;
+    padding-right: 10px;
+}
+
+nav a:hover{
+    color: #fff;
+
+}
+
+/*elegir medida*/
+@media (max-width:700px){
+    header{
+        flex-direction: column;
+    }
+    nav{
+        padding: 10px 0;
+    }
+}
+
+
+
+
+
+
 
 .container-icon{
     position: relative;
